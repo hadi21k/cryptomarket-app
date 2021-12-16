@@ -4,6 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { useGetNewsQuery } from "../../features/newsApi.js";
 
 const News = ({ simplified }) => {
+  const altImage =
+    "https://media.istockphoto.com/photos/bitcoin-ethereum-and-litecoin-picture-id904658652?k=20&m=904658652&s=612x612&w=0&h=3yH0xYO0ckgIZ6aFdGCJ9Ow98teVQletv9BqwpxLNwc=";
+
   const location = useLocation();
   const count = simplified ? 6 : 12;
   const { data } = useGetNewsQuery({
@@ -32,10 +35,8 @@ const News = ({ simplified }) => {
             >
               <div className="flex flex-col space-y-2">
                 <img
-                  src={image?.thumbnail.contentUrl}
-                  width={image.thumbnail.width}
-                  height={image.thumbnail.height}
-                  alt={name}
+                  src={altImage}
+                  alt="news photo"
                   className="aspect-[4/3] rounded-lg"
                 />
                 <div>
