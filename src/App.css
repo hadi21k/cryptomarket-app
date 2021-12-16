@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navbarBg: #1b1c20;
+  --mainBg: #1d1e25;
+  --boxBg: #323447;
+  --mainColor: #ffff;
+  --secondaryColor: #a0a6bb;
+}
+
