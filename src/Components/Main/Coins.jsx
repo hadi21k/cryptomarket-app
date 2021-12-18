@@ -1,17 +1,17 @@
-import millify from "millify";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGetCoinsQuery } from "../../features/cryptoApi";
+import { useInput } from "../../Hooks/useInput";
 
 const simplifyNumber = (number) => {
   return Math.floor(number * 10000) / 100;
 };
 
 const Coins = ({ simplified }) => {
+  const [searchTerm, searchTermAttribute] = useInput("");
   const location = useLocation();
   const count = simplified ? 10 : 100;
   const { data, isLoading } = useGetCoinsQuery(count);
-  const [searchTerm, setSearchTerm] = useState("");
   const [coins, setCoins] = useState([]);
   console.log(coins);
   useEffect(() => {
@@ -26,8 +26,7 @@ const Coins = ({ simplified }) => {
         {location.pathname !== "/" && (
           <input
             type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            {...searchTermAttribute}
             className="outline-none py-2 px-3 rounded-lg mt-3 w-1/2 mx-auto bg-[#E63946] text-white placeholder-white"
             placeholder="Search for a coin"
           />
@@ -35,7 +34,9 @@ const Coins = ({ simplified }) => {
       </div>
       {location.pathname === "/" && (
         <div className="flex items-center justify-between mb-4 text-white">
-          <h1 className="font-bold text-xl">Cryptocurrencies</h1>
+          <h1 className="font-bold text-xl sm:block hidden">
+            Cryptocurrencies
+          </h1>
           {location.pathname !== "/news" && (
             <Link to="/coins">
               <h1 className="text-[#ffce45] text-sm font-bold">Show more</h1>

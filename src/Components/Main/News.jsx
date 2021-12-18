@@ -32,7 +32,9 @@ const News = ({ simplified }) => {
       ) : (
         <>
           <div className="flex items-center justify-between mb-4 text-white">
-            <h1 className="font-bold text-xl">{selectedCoin} News</h1>
+            <h1 className="font-bold text-xl sm:block hidden">
+              {selectedCoin} News
+            </h1>
             {location.pathname !== "/news" && (
               <Link to="/news">
                 <h1 className="text-[#ffce45] text-sm font-bold">Show more</h1>
