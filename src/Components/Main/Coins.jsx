@@ -4,13 +4,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useGetCoinsQuery } from "../../features/cryptoApi";
 
 const simplifyNumber = (number) => {
-  return Math.floor(number * 100).toLocaleString();
+  return Math.floor(number * 10000) / 100;
 };
 
 const Coins = ({ simplified }) => {
   const location = useLocation();
-  const count = simplified ? 10 : 50;
-  const { data } = useGetCoinsQuery(count);
+  const count = simplified ? 10 : 100;
+  const { data, isLoading } = useGetCoinsQuery(count);
   const [searchTerm, setSearchTerm] = useState("");
   const [coins, setCoins] = useState([]);
   console.log(coins);
@@ -43,56 +43,62 @@ const Coins = ({ simplified }) => {
           )}
         </div>
       )}
-      <div className="flex flex-col space-y-4">
-        <div className="px-3 rounded grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 text-white gap-8 text-xs font-bold">
-          <div className="flex items-center space-x-2">
-            <span>#</span>
-            <span>Name</span>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="flex flex-col space-y-4">
+          <div className="px-3 rounded grid grid-cols-3 sm:grid-cols-4 text-center lg:grid-cols-6 text-white gap-8 text-xs font-bold">
+            <div className="flex items-center space-x-2 justify-center">
+              <span>#</span>
+              <span>Name</span>
+            </div>
+            <div>Price</div>
+            <div>24%</div>
+            <div className="sm:block hidden">MarketCap</div>
+            <div className="hidden lg:block">Volume24h</div>
+            <div className="hidden lg:block">CirculatingSupply</div>
           </div>
-          <div>Price</div>
-          <div>24%</div>
-          <div>MarketCap</div>
-          <div className="hidden lg:block">Volume24h</div>
-          <div className="hidden lg:block">CirculatingSupply</div>
-        </div>
-        {coins?.map((coin) => (
-          <div
-            key={coin.id}
-            className="shadow-md p-3 grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 hover:shadow-lg gap-8 font-semibold"
-          >
-            <h3 className="font-semibold text-white">
-              <div className="flex items-center space-x-2">
-                <div>{coin.rank}</div>
-                <div>
-                  <img
-                    src={coin.iconUrl}
-                    alt={coin.name}
-                    className="w-6 h-6 max-w-full"
-                  />
+          {coins?.map((coin) => (
+            <div
+              key={coin.id}
+              className="shadow-md p-3 grid text-center grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 hover:shadow-lg gap-8 font-semibold"
+            >
+              <h3 className="font-semibold text-white">
+                <div className="flex items-center space-x-2">
+                  <div>{coin.rank}</div>
+                  <div>
+                    <img
+                      src={coin.iconUrl}
+                      alt="coin"
+                      className="w-6 h-6 max-w-full"
+                    />
+                  </div>
+                  <span className="text-sm">{coin.name}</span>
                 </div>
-                <span>{coin.name}</span>
+              </h3>
+              <div className="text-white text-sm">
+                {simplifyNumber(coin.price)}
               </div>
-            </h3>
-            <div className="text-white text-sm">{simplifyNumber(coin.price)}</div>
-            <div>
-              {coin.change > 0 ? (
-                <span className="text-[#2dc653] text-xs">{coin.change}</span>
-              ) : (
-                <span className="text-red-500 text-xs">{coin.change}</span>
-              )}
+              <div>
+                {coin.change > 0 ? (
+                  <span className="text-[#2dc653] text-xs">{coin.change}</span>
+                ) : (
+                  <span className="text-red-500 text-xs">{coin.change}</span>
+                )}
+              </div>
+              <div className="text-[#ffce45] text-xs sm:block hidden ">
+                {Math.floor(coin.marketCap).toLocaleString()}
+              </div>
+              <div className="text-[#ffce45] text-xs hidden lg:block">
+                {Math.floor(coin.volume).toLocaleString()}
+              </div>
+              <div className="text-[#ffce45] text-xs lg:block hidden">
+                {Math.floor(coin.circulatingSupply).toLocaleString()}
+              </div>
             </div>
-            <div className="text-red-500 text-xs ">
-              {simplifyNumber(coin.marketCap)}
-            </div>
-            <div className="text-white text-xs hidden lg:block">
-              {simplifyNumber(coin.volume)}
-            </div>
-            <div className="text-white text-xs lg:block hidden">
-              {simplifyNumber(coin.circulatingSupply)}
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
