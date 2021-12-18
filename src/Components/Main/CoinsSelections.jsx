@@ -9,11 +9,11 @@ const CoinsSelections = ({ selectedCoin, setSelectedCoin }) => {
   return (
     <>
       <Listbox value={selectedCoin} onChange={setSelectedCoin}>
-        <Listbox.Button className="text-black bg-[#ffce45] font-semibold w-1/2 flex items-center justify-between px-2 py-1 rounded outline-none">
+        <Listbox.Button className="text-black bg-[#ffce45] font-semibold w-full sm:w-1/2 flex items-center justify-between px-2 py-1 rounded outline-none">
           <span>{selectedCoin}</span>
           <CgArrowsScrollV className="w-5 h-5" />
         </Listbox.Button>
-        <Listbox.Options className="overflow-y-auto w-1/2 h-[120px] mt-2 outline-none">
+        <Listbox.Options className="overflow-y-auto w-full sm:w-1/2 h-[120px] mt-2 outline-none">
           {coins?.data.coins.map((coin, index) => (
             <Listbox.Option key={index} value={coin.name}>
               {({ active, selected }) => (
