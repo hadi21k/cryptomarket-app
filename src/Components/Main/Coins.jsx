@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGetCoinsQuery } from "../../features/cryptoApi";
 import { useInput } from "../../Hooks/useInput";
-
-const simplifyNumber = (number) => {
-  return Math.floor(number * 10000) / 100;
-};
+import Loading from "../Loading";
 
 const Coins = ({ simplified }) => {
   const [searchTerm, searchTermAttribute] = useInput("");
@@ -13,7 +10,6 @@ const Coins = ({ simplified }) => {
   const count = simplified ? 10 : 100;
   const { data, isLoading } = useGetCoinsQuery(count);
   const [coins, setCoins] = useState([]);
-  console.log(coins);
   useEffect(() => {
     const filteredCoins = data?.data.coins.filter((coin) => {
       return coin.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -21,8 +17,8 @@ const Coins = ({ simplified }) => {
     setCoins(filteredCoins);
   }, [searchTerm, data]);
   return (
-    <div className="flex flex-col space-y-8 mb-8">
-      <div className="mx-auto w-full flex items-center justify-center">
+    <div className="flex flex-col mb-8 space-y-8">
+      <div className="flex items-center justify-center w-full mx-auto">
         {location.pathname !== "/" && (
           <input
             type="text"
@@ -34,7 +30,7 @@ const Coins = ({ simplified }) => {
       </div>
       {location.pathname === "/" && (
         <div className="flex items-center justify-between mb-4 text-white">
-          <h1 className="font-bold text-xl sm:block hidden">
+          <h1 className="hidden text-xl font-bold sm:block">
             Cryptocurrencies
           </h1>
           {location.pathname !== "/news" && (
@@ -45,58 +41,61 @@ const Coins = ({ simplified }) => {
         </div>
       )}
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <div className="flex flex-col space-y-4">
-          <div className="px-3 rounded grid grid-cols-3 sm:grid-cols-4 text-center lg:grid-cols-6 text-white gap-8 text-xs font-bold">
-            <div className="flex items-center space-x-2 justify-center">
+          <div className="grid grid-cols-3 gap-8 px-3 text-xs font-bold text-center text-white rounded sm:grid-cols-4 lg:grid-cols-6">
+            <div className="flex items-center justify-center space-x-2">
               <span>#</span>
               <span>Name</span>
             </div>
             <div>Price</div>
             <div>24%</div>
-            <div className="sm:block hidden">MarketCap</div>
+            <div className="hidden sm:block">MarketCap</div>
             <div className="hidden lg:block">Volume24h</div>
             <div className="hidden lg:block">CirculatingSupply</div>
           </div>
           {coins?.map((coin) => (
-            <div
-              key={coin.id}
-              className="shadow-md p-3 grid text-center grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 hover:shadow-lg gap-8 font-semibold"
-            >
-              <h3 className="font-semibold text-white">
-                <div className="flex items-center space-x-2">
-                  <div>{coin.rank}</div>
-                  <div>
-                    <img
-                      src={coin.iconUrl}
-                      alt="coin"
-                      className="w-6 h-6 max-w-full"
-                    />
+            <Link key={coin.id} to={`/coins/${coin.id}`}>
+              <div className="grid grid-cols-3 gap-8 p-3 font-semibold text-center shadow-md sm:grid-cols-4 lg:grid-cols-6 hover:shadow-lg">
+                <h3 className="font-semibold text-white">
+                  <div className="flex items-center space-x-2">
+                    <div>{coin.rank}</div>
+                    <div>
+                      <img
+                        src={coin.iconUrl}
+                        alt="coin"
+                        className="w-6 h-6 max-w-full"
+                      />
+                    </div>
+                    <span className="text-sm">{coin.name}</span>
                   </div>
-                  <span className="text-sm">{coin.name}</span>
+                </h3>
+                <div className="text-sm text-white">
+                  {coin.price >= 1
+                    ? Math.floor(coin.price).toLocaleString()
+                    : Math.floor(coin.price * 100000) / 100000}
                 </div>
-              </h3>
-              <div className="text-white text-sm">
-                {simplifyNumber(coin.price)}
+                <div>
+                  {coin.change > 0 ? (
+                    <span className="text-[#2dc653] text-xs">
+                      {coin.change}
+                    </span>
+                  ) : (
+                    <span className="text-xs text-red-500">{coin.change}</span>
+                  )}
+                </div>
+                <div className="text-[#ffce45] text-xs sm:block hidden ">
+                  {Math.floor(coin.marketCap).toLocaleString()}
+                </div>
+                <div className="text-[#ffce45] text-xs hidden lg:block">
+                  {Math.floor(coin.volume).toLocaleString()}
+                </div>
+                <div className="text-[#ffce45] text-xs lg:block hidden">
+                  {Math.floor(coin.circulatingSupply).toLocaleString()}
+                </div>
               </div>
-              <div>
-                {coin.change > 0 ? (
-                  <span className="text-[#2dc653] text-xs">{coin.change}</span>
-                ) : (
-                  <span className="text-red-500 text-xs">{coin.change}</span>
-                )}
-              </div>
-              <div className="text-[#ffce45] text-xs sm:block hidden ">
-                {Math.floor(coin.marketCap).toLocaleString()}
-              </div>
-              <div className="text-[#ffce45] text-xs hidden lg:block">
-                {Math.floor(coin.volume).toLocaleString()}
-              </div>
-              <div className="text-[#ffce45] text-xs lg:block hidden">
-                {Math.floor(coin.circulatingSupply).toLocaleString()}
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
