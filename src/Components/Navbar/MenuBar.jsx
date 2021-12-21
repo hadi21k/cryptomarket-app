@@ -27,7 +27,7 @@ const MenuBar = () => {
         >
           <Menu.Items className="bg-[#ffce45] z-10 outline-none rounded absolute right-0 top-[70px] w-[200px]">
             {items.map(({ label, href }, index) => (
-              <Link to={href}>
+              <Link key={index} href={href}>
                 <Menu.Item
                   as="div"
                   key={index}
