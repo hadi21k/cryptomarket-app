@@ -20,9 +20,9 @@ const Main = () => {
               </>
             }
           />
-          <Route path="/coins" element={<Coins simplified={false} />} />
-          <Route path="/coins/:coinId" element={<CoinDetails />} />
-          <Route path="/news" element={<News simplified={false} />} />
+          <Route path="coins" element={<Coins simplified={false} />} />
+          <Route path="coins/:coinId" element={<CoinDetails />} />
+          <Route path="news" element={<News simplified={false} />} />
           <Route path="*" element={"Page Not Found"} />
         </Routes>
       </div>

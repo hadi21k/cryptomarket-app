@@ -23,7 +23,7 @@ const Coins = ({ simplified }) => {
           <input
             type="text"
             {...searchTermAttribute}
-            className="outline-none py-2 px-3 rounded-lg mt-3 w-1/2 mx-auto bg-[#E63946] text-white placeholder-white"
+            className="outline-none py-2 px-3 rounded-lg mt-3 w-1/2 mx-auto font-semibold text-[#141414] bg-[#ffce45] placeholder-[#141414]"
             placeholder="Search for a coin"
           />
         )}

@@ -1,9 +1,10 @@
 import { AiOutlineMenu } from "react-icons/ai";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MenuBar = () => {
+  const navigate = useNavigate();
   const items = [
     { label: "Home", href: "/" },
     { label: "Cryptocurrencies", href: "/coins" },
@@ -27,7 +28,7 @@ const MenuBar = () => {
         >
           <Menu.Items className="bg-[#ffce45] z-10 outline-none rounded absolute right-0 top-[70px] w-[200px]">
             {items.map(({ label, href }, index) => (
-              <Link key={index} href={href}>
+              <Link to={href} key={index}>
                 <Menu.Item
                   as="div"
                   key={index}
@@ -36,7 +37,7 @@ const MenuBar = () => {
                   {({ active }) => (
                     <div
                       className={`${
-                        active && "text-red-500"
+                        active && "text-slate-500"
                       } px-2 py-3 transition duration-100`}
                     >
                       {label}

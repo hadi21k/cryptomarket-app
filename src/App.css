@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .small_box {
+    @apply font-medium text-white rounded px-1 bg-[#4a4b63];
+  }
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
