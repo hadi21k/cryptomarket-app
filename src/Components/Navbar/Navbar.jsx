@@ -5,10 +5,11 @@ import { FaCoins } from "react-icons/fa";
 import { RiExchangeLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import MenuBar from "./MenuBar";
+import AuthSection from "../Auth/AuthSection";
 
 const Navbar = () => {
   return (
-    <div className="text-white bg-[#0a0a0a] h-[70px] relative">
+    <div className="text-white bg-[#0a0a0a] h-[70px]">
       <div className="container flex items-center justify-between h-full px-2 mx-auto sm:px-0">
         <Link to="/">
           <div className="flex items-center space-x-1 title">
@@ -29,12 +30,6 @@ const Navbar = () => {
               <h1 className="font-semibold">Cryptocurrencies</h1>
             </li>
           </Link>
-          <Link to="exchanges">
-            <li className="flex items-center space-x-1">
-              <RiExchangeLine className="w-4 h-4" />
-              <h1 className="font-semibold">Exchanges</h1>
-            </li>
-          </Link>
           <Link to="news">
             <li className="flex items-center space-x-1">
               <BsNewspaper className="w-4 h-4" />
@@ -42,7 +37,10 @@ const Navbar = () => {
             </li>
           </Link>
         </ul>
-        <MenuBar />
+        <div className="flex items-center space-x-2">
+          <AuthSection />
+          <MenuBar />
+        </div>
       </div>
     </div>
   );

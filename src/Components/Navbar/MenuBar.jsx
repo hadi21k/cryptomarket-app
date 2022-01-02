@@ -8,12 +8,11 @@ const MenuBar = () => {
   const items = [
     { label: "Home", href: "/" },
     { label: "Cryptocurrencies", href: "/coins" },
-    { label: "Exchanges", href: "/exchanges" },
     { label: "News", href: "/news" },
   ];
   return (
     <>
-      <Menu as="div" className="flex lg:hidden">
+      <Menu as="div" className="flex lg:hidden relative">
         <Menu.Button className="outline-none">
           <AiOutlineMenu className="w-6 h-6" />
         </Menu.Button>
@@ -26,7 +25,7 @@ const MenuBar = () => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="bg-[#ffce45] z-10 outline-none rounded absolute right-0 top-[70px] w-[200px]">
+          <Menu.Items className="bg-[#ffce45] z-10 outline-none rounded absolute origin-top-right right-0 top-[40px] w-[200px]">
             {items.map(({ label, href }, index) => (
               <Link to={href} key={index}>
                 <Menu.Item
@@ -37,7 +36,7 @@ const MenuBar = () => {
                   {({ active }) => (
                     <div
                       className={`${
-                        active && "text-slate-500"
+                        active && "text-red-500"
                       } px-2 py-3 transition duration-100`}
                     >
                       {label}

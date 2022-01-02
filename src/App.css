@@ -6,10 +6,14 @@
   .small_box {
     @apply font-medium text-white rounded px-1 bg-[#4a4b63];
   }
+  .input-field {
+    @apply px-3 py-2 outline-none rounded placeholder-black font-semibold w-1/2;
+  }
 }
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-thumb {
   background: #6c6c6f;

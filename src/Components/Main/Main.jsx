@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import SignUp from "../Auth/SignUp";
 import CoinDetails from "../CoinDetails/CoinDetails";
 import Coins from "./Coins";
 import News from "./News";
@@ -23,6 +24,7 @@ const Main = () => {
           <Route path="coins" element={<Coins simplified={false} />} />
           <Route path="coins/:coinId" element={<CoinDetails />} />
           <Route path="news" element={<News simplified={false} />} />
+          <Route path="signup" element={<SignUp />} />
           <Route path="*" element={"Page Not Found"} />
         </Routes>
       </div>
