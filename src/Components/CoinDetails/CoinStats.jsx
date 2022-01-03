@@ -1,7 +1,5 @@
-
 const CoinStats = ({ coinDetails }) => {
   const coin = coinDetails?.data?.coin;
-  console.log(coin);
   return (
     <>
       <div className="grid grid-cols-1 gap-8 py-3 md:grid-cols-2">
