@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGetNewsQuery } from "../../features/newsApi.js";
 import { useGetCoinsQuery } from "../../features/cryptoApi";
 import CoinsSelections from "./CoinsSelections.jsx";
@@ -33,7 +33,7 @@ const News = ({ simplified }) => {
       ) : (
         <>
           <div className="flex items-center justify-between mb-4 text-white">
-            <h1 className="font-bold text-xl sm:block hidden">
+            <h1 className="hidden text-xl font-bold sm:block">
               {selectedCoin} News
             </h1>
             {location.pathname !== "/news" && (
@@ -42,7 +42,7 @@ const News = ({ simplified }) => {
               </Link>
             )}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {news?.value.map(
               ({ description, image, name, url, datePublished }, i) => (
                 <a
@@ -50,7 +50,7 @@ const News = ({ simplified }) => {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shadow transition-all p-1 duration-500 rounded-lg flex flex-col md:justify-between space-y-2 hover:shadow-md"
+                  className="flex flex-col p-1 space-y-2 transition-all duration-500 rounded-lg shadow md:justify-between hover:shadow-md"
                 >
                   <div className="flex flex-col space-y-2">
                     <img
@@ -61,7 +61,7 @@ const News = ({ simplified }) => {
                     <div>
                       <h3 className="text-white">{name}</h3>
                     </div>
-                    <div className="text-white text-xs mt-4 ">
+                    <div className="mt-4 text-xs text-white ">
                       {description.length > 100
                         ? `${description.substring(0, 100)}...`
                         : description}

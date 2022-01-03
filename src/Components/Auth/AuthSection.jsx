@@ -30,7 +30,6 @@ const AuthSection = () => {
     });
     return () => subscriptions;
   }, []);
-  console.log(user);
   return (
     <div>
       <div>
@@ -39,7 +38,7 @@ const AuthSection = () => {
         ) : (
           <FiLogIn
             onClick={() => navigate("/signup")}
-            className="w-7 h-7 cursor-pointer"
+            className="cursor-pointer w-7 h-7"
           />
         )}
       </div>

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { useInput } from "../../Hooks/useInput";
 import { FcGoogle } from "react-icons/fc";
 import { auth, signIn } from "../../Firebase/firebase";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../features/usersReducer";
 import { useNavigate } from "react-router-dom";
@@ -56,12 +52,12 @@ const SignUp = () => {
     <div className="min-h-[calc(100vh-70px)] flex items-center justify-center flex-col space-y-3">
       <div
         onClick={signInWithGoogle}
-        className="bg-white flex cursor-pointer items-center justify-center space-x-1 w-1/2 py-2 rounded-lg font-semibold"
+        className="flex items-center justify-center w-1/2 py-2 space-x-1 font-semibold bg-white rounded-lg cursor-pointer"
       >
         <FcGoogle className="w-6 h-6" /> <h1> Sign in with Google</h1>
       </div>
       <form
-        className="flex items-center flex-col w-full space-y-2"
+        className="flex flex-col items-center w-full space-y-2"
         onSubmit={signUpWithEmailAndPassword}
       >
         <input
@@ -80,7 +76,7 @@ const SignUp = () => {
         />
         <input
           type="submit"
-          className="w-1/2 text-center bg-red-500 text-black font-semibold py-1 rounded"
+          className="w-1/2 py-1 font-semibold text-center text-black bg-red-500 rounded"
           value="Sign up"
         />
       </form>

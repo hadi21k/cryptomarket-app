@@ -1,4 +1,3 @@
-import React from "react";
 
 const CoinStats = ({ coinDetails }) => {
   const coin = coinDetails?.data?.coin;
@@ -32,7 +31,7 @@ const CoinStats = ({ coinDetails }) => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-purple-500  small_box"
+                className="bg-purple-500 small_box"
               >
                 {social.type}
               </a>

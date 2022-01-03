@@ -1,4 +1,3 @@
-import React from "react";
 import LoadingAnimation from "../Assets/Cube-1s-200px.svg";
 
 const Loading = () => {

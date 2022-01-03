@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,7 +11,6 @@ import {
 import { Line } from "react-chartjs-2";
 import { useGetCryptoHistoryQuery } from "../../features/cryptoApi";
 import Loading from "../Loading";
-import { Tab } from "@headlessui/react";
 
 ChartJS.register(
   CategoryScale,
