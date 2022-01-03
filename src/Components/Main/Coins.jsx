@@ -56,7 +56,7 @@ const Coins = ({ simplified }) => {
             <div className="hidden lg:block">CirculatingSupply</div>
           </div>
           {coins?.map((coin) => (
-            <Link key={coin.id} to={`/coins/${coin.id}`}>
+            <Link key={coin.uuid} to={`/coins/${coin.uuid}`}>
               <div className="grid grid-cols-3 gap-8 p-3 font-semibold text-center shadow-md sm:grid-cols-4 lg:grid-cols-6 hover:shadow-lg">
                 <h3 className="font-semibold text-white">
                   <div className="flex items-center space-x-2">

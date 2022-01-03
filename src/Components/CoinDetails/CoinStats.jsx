@@ -2,6 +2,7 @@ import React from "react";
 
 const CoinStats = ({ coinDetails }) => {
   const coin = coinDetails?.data?.coin;
+  console.log(coin);
   return (
     <>
       <div className="grid grid-cols-1 gap-8 py-3 md:grid-cols-2">
@@ -15,7 +16,6 @@ const CoinStats = ({ coinDetails }) => {
           </div>
           <div className="flex items-center space-x-1">
             <span className="small_box">Rank #{coin.rank}</span>
-            <span className="small_box">{coin.type}</span>
           </div>
           <div className="grid max-w-xs grid-cols-3 gap-4">
             <a
@@ -26,13 +26,13 @@ const CoinStats = ({ coinDetails }) => {
             >
               URL
             </a>
-            {coin.socials.map((social, i) => (
+            {coin.links.map((social, i) => (
               <a
                 key={i}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-purple-500 small_box"
+                className="bg-purple-500  small_box"
               >
                 {social.type}
               </a>

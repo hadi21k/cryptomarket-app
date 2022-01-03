@@ -15,7 +15,7 @@ const GeneralInfo = ({ coinDetails }) => {
             </div>
             <div className="py-6">
               <h6 className="text-[#646B80] font-semibold">Volume24h:</h6>
-              <span> {Math.floor(coin.volume).toLocaleString()}</span>
+              <span> {Math.floor(coin["24hVolume"]).toLocaleString()}</span>
             </div>
             <div className="py-6">
               <h6 className="text-[#646B80] font-semibold">AllTimeHigh:</h6>
@@ -27,7 +27,7 @@ const GeneralInfo = ({ coinDetails }) => {
               <h6 className="text-[#646B80] font-semibold">
                 CirculatingSupply:
               </h6>
-              {Math.floor(coin.circulatingSupply).toLocaleString()}
+              {Math.floor(coin.supply.circulating).toLocaleString()}
             </div>
           </div>
           <Description coinDetails={coinDetails} />
