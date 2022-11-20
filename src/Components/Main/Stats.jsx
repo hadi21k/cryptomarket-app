@@ -28,7 +28,7 @@ const Stats = () => {
         <div className="py-2 flex items-center space-x-2 text-xs font-semibold">
           <h1 className="text-[#F1FAEE]">Total MarketCap: </h1>
           <span className="text-[#ffce45] font-bold">
-            {millify(globalStats.totalMarketCap)}
+            {globalStats.totalMarketCap}
           </span>
         </div>
         <div className="py-2 flex items-center space-x-2 text-xs font-semibold">

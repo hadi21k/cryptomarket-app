@@ -16,6 +16,7 @@ const Coins = ({ simplified }) => {
     });
     setCoins(filteredCoins);
   }, [searchTerm, data]);
+
   return (
     <div className="flex flex-col mb-8 space-y-8">
       <div className="flex items-center justify-center w-full mx-auto">
@@ -44,7 +45,7 @@ const Coins = ({ simplified }) => {
         <Loading />
       ) : (
         <div className="flex flex-col space-y-4">
-          <div className="grid grid-cols-3 gap-8 px-3 text-xs font-bold text-center text-white rounded sm:grid-cols-4 lg:grid-cols-6">
+          <div className="grid grid-cols-3 gap-8 px-3 text-xs font-bold text-center text-white rounded sm:grid-cols-4 lg:grid-cols-5">
             <div className="flex items-center justify-center space-x-2">
               <span>#</span>
               <span>Name</span>
@@ -53,11 +54,10 @@ const Coins = ({ simplified }) => {
             <div>24%</div>
             <div className="hidden sm:block">MarketCap</div>
             <div className="hidden lg:block">Volume24h</div>
-            <div className="hidden lg:block">CirculatingSupply</div>
           </div>
           {coins?.map((coin) => (
             <Link key={coin.uuid} to={`/coins/${coin.uuid}`}>
-              <div className="grid grid-cols-3 gap-8 p-3 font-semibold text-center shadow-md sm:grid-cols-4 lg:grid-cols-6 hover:shadow-lg">
+              <div className="grid grid-cols-3 gap-8 p-3 font-semibold text-center shadow-md sm:grid-cols-4 lg:grid-cols-5 hover:shadow-lg">
                 <h3 className="font-semibold text-white">
                   <div className="flex items-center space-x-2">
                     <div>{coin.rank}</div>
@@ -89,10 +89,7 @@ const Coins = ({ simplified }) => {
                   {Math.floor(coin.marketCap).toLocaleString()}
                 </div>
                 <div className="text-[#ffce45] text-xs hidden lg:block">
-                  {Math.floor(coin.volume).toLocaleString()}
-                </div>
-                <div className="text-[#ffce45] text-xs lg:block hidden">
-                  {Math.floor(coin.circulatingSupply).toLocaleString()}
+                  {Math.floor(coin["24hVolume"]).toLocaleString()}
                 </div>
               </div>
             </Link>

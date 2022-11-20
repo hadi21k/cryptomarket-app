@@ -1,3 +1,4 @@
+import "@tremor/react/dist/esm/tremor.css";
 import "./App.css";
 import Main from "./Components/Main/Main";
 import Navbar from "./Components/Navbar/Navbar";

@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { useGetCryptoHistoryQuery } from "../../features/cryptoApi";
 import Loading from "../Loading";
@@ -26,16 +27,24 @@ const CoinGraph = ({ coinId, coinDetails }) => {
   const { data: coinHistory, isFetching } = useGetCryptoHistoryQuery({
     coinId,
   });
-  const coinPrice = [];
-  const coinTimestamp = [];
-  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinPrice.push(coinHistory?.data?.history[i].price);
-  }
-  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinTimestamp.push(
-      new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString()
-    );
-  }
+  const [graph, setGraph] = useState([]);
+  const coinTimestamp = graph?.map((item) => item.time);
+  const coinPrice = graph?.map((item) => item.price);
+  useEffect(() => {
+    if (coinHistory?.data?.history) {
+      const graphData = coinHistory.data.history.map((coin) => {
+        return {
+          time: new Date(coin.timestamp * 1000)
+            .toLocaleTimeString()
+            .slice(0, 4),
+          price: coin.price,
+        };
+      });
+
+      setGraph(graphData.slice(0, 30).reverse());
+    }
+  }, [coinHistory]);
+
   const data = {
     labels: coinTimestamp,
     datasets: [
